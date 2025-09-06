@@ -23,7 +23,7 @@ public class MemoryCandidateRepository implements CandidateRepository {
         save(new Candidate(0, "Petr", "Senior+ java dev", LocalDateTime.now().minusMinutes(20_000)));
     }
 
-    public MemoryCandidateRepository getInstance() {
+    public static MemoryCandidateRepository getInstance() {
         return INSTANCE;
     }
 
