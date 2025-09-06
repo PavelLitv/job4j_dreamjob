@@ -51,6 +51,7 @@ public class VacancyController {
         var isUpdated = vacancyRepository.update(vacancy);
         if (!isUpdated) {
             model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
+            LOGGER.warn("Update: Вакансия с идентификатором {} не найдена", vacancy.getId());
             return "errors/404";
         }
         return "redirect:/vacancies";
@@ -64,7 +65,7 @@ public class VacancyController {
             LOGGER.warn("Delete: Вакансия с идентификатором {} не найдена", id);
             return "errors/404";
         }
-        LOGGER.info("Вакансия с идентификатором {} удалена", id);
+        LOGGER.info("Delete: Вакансия с идентификатором {} удалена", id);
         return "redirect:/vacancies";
     }
 }
