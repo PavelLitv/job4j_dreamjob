@@ -1,5 +1,7 @@
 package ru.job4j.dreamjob.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import ru.job4j.dreamjob.repository.VacancyRepository;
 public class VacancyController {
 
     private final VacancyRepository vacancyRepository = MemoryVacancyRepository.getInstance();
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(VacancyController.class);
 
     @GetMapping
     public String getAll(Model model) {
@@ -35,6 +39,7 @@ public class VacancyController {
         var vacancyOptional = vacancyRepository.findById(id);
         if (vacancyOptional.isEmpty()) {
             model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
+            LOGGER.warn("GetById: Вакансия с идентификатором {} не найдена", id);
             return "errors/404";
         }
         model.addAttribute("vacancy", vacancyOptional.get());
@@ -56,8 +61,10 @@ public class VacancyController {
         var isDeleted = vacancyRepository.deleteById(id);
         if (!isDeleted) {
             model.addAttribute("message", "Вакансия с указанным идентификатором не найдена");
+            LOGGER.warn("Delete: Вакансия с идентификатором {} не найдена", id);
             return "errors/404";
         }
+        LOGGER.info("Вакансия с идентификатором {} удалена", id);
         return "redirect:/vacancies";
     }
 }
