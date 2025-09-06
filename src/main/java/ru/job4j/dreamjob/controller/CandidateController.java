@@ -2,7 +2,6 @@ package ru.job4j.dreamjob.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +11,9 @@ import ru.job4j.dreamjob.service.CandidateService;
 @Controller
 @RequestMapping("/candidates")
 public class CandidateController {
-
     private final CandidateService candidateService;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(CandidateController.class);
 
-    @Autowired
     public CandidateController(CandidateService candidateService) {
         this.candidateService = candidateService;
     }
