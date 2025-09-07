@@ -16,12 +16,12 @@ public class MemoryCandidateRepository implements CandidateRepository {
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private MemoryCandidateRepository() {
-        save(new Candidate(0, "Pavel", "Intern java dev", LocalDateTime.now()));
-        save(new Candidate(0, "Olga", "Junior java dev", LocalDateTime.now().minusMinutes(1_000)));
-        save(new Candidate(0, "Maria", "Junior+ java dev", LocalDateTime.now().minusMinutes(5_000)));
-        save(new Candidate(0, "Ivan", "Middle java dev", LocalDateTime.now().minusMinutes(10_000)));
-        save(new Candidate(0, "Sergey", "Middle+ java dev", LocalDateTime.now().minusMinutes(15_000)));
-        save(new Candidate(0, "Petr", "Senior+ java dev", LocalDateTime.now().minusMinutes(20_000)));
+        save(new Candidate(0, "Pavel", "Intern java dev", LocalDateTime.now(), 1));
+        save(new Candidate(0, "Olga", "Junior java dev", LocalDateTime.now().minusMinutes(1_000), 2));
+        save(new Candidate(0, "Maria", "Junior+ java dev", LocalDateTime.now().minusMinutes(5_000), 3));
+        save(new Candidate(0, "Ivan", "Middle java dev", LocalDateTime.now().minusMinutes(10_000), 1));
+        save(new Candidate(0, "Sergey", "Middle+ java dev", LocalDateTime.now().minusMinutes(15_000), 2));
+        save(new Candidate(0, "Petr", "Senior+ java dev", LocalDateTime.now().minusMinutes(20_000), 3));
     }
 
     @Override
@@ -43,7 +43,8 @@ public class MemoryCandidateRepository implements CandidateRepository {
                         oldCandidate.getId(),
                         candidate.getName(),
                         candidate.getDescription(),
-                        candidate.getCreationDate())
+                        candidate.getCreationDate(),
+                        candidate.getCityId())
         ) != null;
     }
 
