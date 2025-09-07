@@ -18,12 +18,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
     private final Map<Integer, Vacancy> vacancies = new ConcurrentHashMap<>();
 
     private MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "Стажер на частичную занятость", LocalDateTime.now()));
-        save(new Vacancy(0, "Junior Java Developer", "1 год опыта, требования: java core, ООП, SOLID", LocalDateTime.now().minusMinutes(1_000)));
-        save(new Vacancy(0, "Junior+ Java Developer", "2 года опыта, требования Spring/Spring boot", LocalDateTime.now().minusMinutes(5_000)));
-        save(new Vacancy(0, "Middle Java Developer", "3 года опыта, уверенные знания Spring/Spring boot, Hibernate", LocalDateTime.now().minusMinutes(9_999)));
-        save(new Vacancy(0, "Middle+ Java Developer", "3+ года опыта, уверенные знания Spring/Spring boot, Hibernate, контейнеризация", LocalDateTime.now().minusMinutes(15_000)));
-        save(new Vacancy(0, "Senior Java Developer", "6+ лет опыта, опыт высоко нагруженных систем", LocalDateTime.now().minusMinutes(19_999)));
+        save(new Vacancy(0, "Intern Java Developer", "Стажер на частичную занятость", LocalDateTime.now(), true));
+        save(new Vacancy(0, "Junior Java Developer", "1 год опыта, требования: java core, ООП, SOLID", LocalDateTime.now().minusMinutes(1_000), true));
+        save(new Vacancy(0, "Junior+ Java Developer", "2 года опыта, требования Spring/Spring boot", LocalDateTime.now().minusMinutes(5_000), true));
+        save(new Vacancy(0, "Middle Java Developer", "3 года опыта, уверенные знания Spring/Spring boot, Hibernate", LocalDateTime.now().minusMinutes(9_999), true));
+        save(new Vacancy(0, "Middle+ Java Developer", "3+ года опыта, уверенные знания Spring/Spring boot, Hibernate, контейнеризация", LocalDateTime.now().minusMinutes(15_000), true));
+        save(new Vacancy(0, "Senior Java Developer", "6+ лет опыта, опыт высоко нагруженных систем", LocalDateTime.now().minusMinutes(19_999), true));
     }
 
     @Override
@@ -45,7 +45,8 @@ public class MemoryVacancyRepository implements VacancyRepository {
                         oldVacancy.getId(),
                         vacancy.getTitle(),
                         vacancy.getDescription(),
-                        vacancy.getCreationDate())
+                        vacancy.getCreationDate(),
+                        vacancy.getVisible())
         ) != null;
     }
 

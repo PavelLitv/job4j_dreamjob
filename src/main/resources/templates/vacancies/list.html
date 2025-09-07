@@ -8,6 +8,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th><i class="bi bi-square"></i></th>
                 <th scope="col">#</th>
                 <th scope="col">Название</th>
                 <th scope="col">Дата создания</th>
@@ -15,11 +16,17 @@
             </thead>
             <tbody>
             <tr th:each="vacancy: ${vacancies}">
-                <td th:text="${vacancy.id}"/>
                 <td>
-                    <a th:text="${vacancy.title}"
-                       th:href="@{/vacancies/{vacancyId}(vacancyId=${vacancy.id})}">
-                    </a>
+              <span th:if="${vacancy.visible}">
+                <i class="bi bi-check-square"></i>
+              </span>
+                    <span th:if="${!vacancy.visible}">
+                  <i class="bi bi-square"></i>
+              </span>
+                </td>
+                <td th:text="${vacancy.id}"/>
+                <td><a th:text="${vacancy.title}"
+                       th:href="@{/vacancies/{vacancyId}(vacancyId=${vacancy.id})}"></a>
                 </td>
                 <td th:text="${#temporals.format(vacancy.creationDate, 'dd MMMM yyyy HH:mm', T(java.util.Locale).forLanguageTag('ru'))}"/>
             </tr>
